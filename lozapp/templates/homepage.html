@@ -1,0 +1,155 @@
+ {% extends 'base.html' %}
+{% load leaflet_tags %}
+ {% block content %}
+
+
+<!------------------------------texte accueil -->
+    <div class="row rowHome">
+      <div class="large-12 columns">
+        <p>Bienvenue sur le site de Loz'Events.
+          Retrouvez ici tous les petits et grands évenements de la Lozère à Mende et partout en Lozère.
+          Tous les bons plans pour sortir sont sur Loz'Events: soirée danse, match, fête de village, cours et atelier...
+          Inscrivez vous et recevez les infos en direct sur votre smart-phone ou votre boite mail.
+          Vous pouvez aussi postez vos annonces de soirée et promouvoir votre structure sur notre site web.<br> Bougez avec Loz'Events!</p>
+      </div>
+  </div>
+
+<!-------------------------------corps de la home -->
+
+
+    <div class="row rowHome">
+
+<!----------------------------corps map et categorie -->
+
+    <div class="large-8 columns">
+      <div class="row column">
+          <div class="text-center">
+              <h3>La carte des événements</h3>
+          </div>
+          <script type="text/javascript">
+          function map_init_basic (map, options) {
+              {% for event in events %}
+              L.marker([{{event.addr.poly.y|stringformat:".3f"}}, {{event.addr.poly.x|stringformat:".3f"}}]).addTo(map).bindPopup('<a href="event/{{event.slug}}">{{event.title}}</a>');
+              {% endfor %}
+          }
+          </script>
+          <div>
+              {% leaflet_map "idmap" callback="window.map_init_basic" %}
+          </div>
+        </div>
+
+        <div class="text-center">
+            <h3 id="events_cat">Les événements par catégorie</h3>
+        </div>
+
+        <div class="row small-up-1 medium-up-2 large-up-4">
+          <div class="column">
+            <div class="image-wrapper overlay-fade-in">
+                <img class="thumbnail " src="/static/img/concertunthumbnail.jpg">
+              <div class="image-overlay-content">
+                <a href="/event/list?category=1" class="button">Concerts</a>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="image-wrapper overlay-fade-in">
+              <img class="thumbnail " src="/static/img/artthumbnail.jpg">
+              <div class="image-overlay-content">
+                <a href="/event/list?category=2" class="button">Arts</a>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="image-wrapper overlay-fade-in">
+              <img class="thumbnail " src="/static/img/coursthumbnail.jpg">
+              <div class="image-overlay-content">
+                <a href="/event/list?category=3" class="button">Cours & Ateliers</a>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="image-wrapper overlay-fade-in">
+                <img class="thumbnail " src="/static/img/patrimoine.jpg">
+              <div class="image-overlay-content">
+                <a href="/event/list?category=4" class="button">Patrimoine</a>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <div class="row small-up-1 medium-up-2 large-up-2">
+            <div class="column">
+              <div class="image-wrapper overlay-fade-in">
+                  <img class="thumbnail imgCat" src="/static/img/sportun.jpg">
+                <div class="image-overlay-content">
+                  <a href="/event/list?category=5" class="button">Sport</a>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="image-wrapper overlay-fade-in">
+                <img class="thumbnail" src="/static/img/fetes.jpg">
+                <div class="image-overlay-content">
+                  <a href="/event/list?category=6" class="button">Fêtes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+           <!-- </div> -->
+      </div>
+
+<!-------------------------------espace facebook -->
+
+      <div class="large-4 columns">
+          <div class="text-center">
+              <h3>A Venir</h3>
+          </div>
+          <div class="responsive">
+
+              {% for event in events_a_venir %}
+              <div>
+                  <div class="image-wrapper overlay-fade-in">
+                      <img class="thumbnail imgCat" src="/media/{{event.photo}}">
+                      <div class="image-overlay-content">
+                          <h3>{{event.categorie}}</h3>
+                          <a href="event/{{event.slug}}">{{event.begin_date}}<br>{{event.title}}</a>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+          <div class="text-center">
+              <h3 id="actus">Dernières Actus</h3>
+          </div>
+          <div class="responsive">
+
+              {% for event in events_ajoute %}
+              <div>
+                  <div class="image-wrapper overlay-fade-in">
+                      <img class="thumbnail imgCat" src="/media/{{event.photo}}">
+                      <div class="image-overlay-content">
+                          <h3>{{event.categorie}}</h3>
+                          <a href="event/{{event.slug}}">{{event.begin_date}}<br>{{event.title}}</a>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+          <div id="fb-root"></div>
+              <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/fr_CA/sdk.js#xfbml=1&version=v2.6";
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));</script>
+
+
+          <div class="fb-page" data-href="https://www.facebook.com/Loz&#xe8;re-Animations-1722455281324360/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
+      </div>
+<!-- -----------------------------fin facebook -->
+
+</div>
+
+
+{% endblock %}

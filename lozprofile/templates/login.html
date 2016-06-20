@@ -1,0 +1,106 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- breadcrumb -->
+
+<div class="row columns">
+    <nav aria-label="You are here:" role="navigation">
+        <ul class="breadcrumbs">
+            <li><a href="{% url "home-page" %}">Home</a></li>
+            <li class="disabled">log</li>
+        </ul>
+    </nav>
+</div>
+
+      <!-- fenetre log in -->
+
+<div class="row">
+  <div class="medium-6 medium-centered large-4 large-centered columns">
+
+    <form class="log-in-form">
+      <div class="row column ">
+        <h4 class="text-center">Se connecter avec son compte email</h4>
+        <label>Email
+          <input type="text" placeholder="somebody@example.com">
+        </label>
+        <label>Mot de Passe
+          <input type="text" placeholder="Password">
+        </label>
+        <input id="show-password" type="checkbox"><label for="show-password">Voir le mot de passe</label>
+        <p><a type="submit" class="button expanded">Se connecter</a></p>
+        <p class="text-center"> Or </p>
+        <p><a type="submit" class="button expanded">Se connecter avec Facebook</a></p>
+        <p class="text-center"><a href="#">mot de passe oublié?</a></p>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+    <!-- fenetre inscription -->
+
+<div class="row">
+  <div class="medium-6 medium-centered large-4 large-centered columns">
+
+    <form class="log-in-form">
+      <div class="row column ">
+        <h4 class="text-center">Creez votre comptre</h4>
+        <p><a href="{% url "sign-up-part" %}" type="submit" class="button expanded">Compte particulier</a></p>
+        <p class="text-center"> Or </p>
+        <p><a href="{% url "sign-up-pro" %}" type="submit" class="button expanded">Comptre pro</a></p>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+<!-- code avec fenetre modal-large -->
+
+
+      <!--  <div class="title-bar-right">
+          <ul class="menu">
+
+          <li><a href="#" a data-open="myModalSignup">Signup</a></li>
+          <li><a href="#" a data-open="myModal">Log in</a></li>
+          </ul>
+      </div>
+
+      <div class="reveal" id="myModalSignup" data-reveal>
+              <div class="row">
+
+
+      <form class="log medium-centered" action="/login" method="post">
+        <div class="log-in-form">
+          <h4 class="text-center">Sign up</h4>
+          <label>Nom
+            <input type="text" placeholder="Doe">
+          </label>
+          <label>Prenom
+            <input type="text" placeholder="John">
+          </label>
+          <label>Email
+            <input type="text" placeholder="somebody@example.com">
+          </label>
+          <label>Mot de passe
+            <input type="text" placeholder="Password">
+          </label>
+          <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
+          <p><a type="submit" class="button expanded">Sign up</a></p>
+          <p class="text-center"><a href="#">Forgot your password?</a></p>
+        </div>
+      </form> -->
+
+
+
+
+
+
+
+
+
+{% endblock %}

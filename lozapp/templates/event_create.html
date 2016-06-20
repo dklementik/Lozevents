@@ -1,0 +1,54 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+<!-- Header -->
+
+<div class="top-bar">
+    <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text" role="menuitem" tabindex="0"><a href="{% url "home-page" %}">Loz'Events.com</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- texte d'intro -->
+
+  <div class="row medium-8 large-7 columns">
+    <div class="text-center">
+      <h3>Postez ici votre évenement</h3>
+
+      <p>Postez ici votre évenement, il sera en ligne très prochainement.</p>
+    </div>
+  </div>
+
+<!-- formulaire de post -->
+
+<div class="row medium-8 large-7 columns">
+
+    <form class="log-in-form" role="form" name="form" action="/event/create" method="post" enctype="multipart/form-data" >
+     {% csrf_token %}
+       <!-- {{form.title.label_tag}}
+       {{form.title}}
+       {{form.body.label_tag}}
+       {{form.body}}
+       {{form.author.as_hidden}}
+       {{form.errors}} -->
+       {{form}}
+
+       <button type="submit" class="button expanded">Valider</button>
+
+    </form>
+  </div>
+
+
+<!-- fenetre modale
+<div class="reveal" id="exampleModal1" data-reveal>
+  <h1>Awesome. I Have It.</h1>
+  <p class="lead">Your couch. It is mine.</p>
+  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+ -->
+{% endblock %}

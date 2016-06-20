@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load leaflet_tags %}
+
+{% block content %}
+
+    <!-- ---------------------------------------breadcrumb-- -->
+
+<div class="row columns">
+    <nav aria-label="You are here:" role="navigation">
+      <ul class="breadcrumbs">
+        <li><a href="{% url "home-page" %}">Home</a></li>
+        <li class="disabled">Events</li>
+      </ul>
+    </nav>
+</div>
+
+    <!------------------------------------------------- map -->
+
+    <div class="row medium-8 large-7 columns">
+            <script type="text/javascript">
+            function map_init_basic (map, options) {
+                {% for event in events %}
+                L.marker([{{event.addr.poly.y|stringformat:".3f"}}, {{event.addr.poly.x|stringformat:".3f"}}]).addTo(map).bindPopup('<a href="{{event.slug}}">{{event.title}}</a>');
+                {% endfor %}
+            }
+            </script>
+            <div>
+                {% leaflet_map "idmap" callback="window.map_init_basic" %}
+            </div>
+    </div>
+
+
+  <!-- -----------------------------------galerie photos des categories -->
+
+<div class="row medium-8 large-7 columns">
+  <div class="row small-up-1 medium-up-1 large-up-3">
+    {% for event in events %}
+    <div class="column">
+        <div class="callout callouteventlist text-center">
+            <p><a href="{{event.slug}}"><img class="thumbnail thumbnaileventlist" src="/media/{{event.photo}}"></a></p>
+            <p class="alert label">{{event.categorie}}</p>
+            <p class="lead">{{event.title}}</p>
+            <p class="dateeventlist">Du : {{event.begin_date}}
+                <br>Au : {{event.end_date}}</p>
+        </div>
+    </div>
+    {% endfor %}
+ </div>
+</div>
+
+
+
+
+{% endblock %}

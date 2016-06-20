@@ -1,0 +1,12 @@
+static/css/app.css.map
+static/css/app.css
+db.sqlite3
+*.log
+*.pyc
+*css
+.sass-cache
+*.db
+/static/bower_components
+media
+settings.py
+site_settings.py

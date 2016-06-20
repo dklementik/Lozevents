@@ -1,0 +1,77 @@
+{% extends 'base2.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Signin" %}{% endblock %}
+
+{% block content %}
+<!-- <form action="/profile/signin" method="post">
+  {% csrf_token %}
+  {{form}}
+  <button type="submit" class="btn btn-primary"> Valider</button>
+</form> -->
+
+
+<div class="top-bar">
+
+    <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text" role="menuitem" tabindex="0"><a href="{% url "home-page" %}">Loz'Events.com</a></li>
+
+        </ul>
+    </div>
+
+</div>
+
+
+
+      <!-- fenetre log in -->
+<div class="formcol">
+
+
+<div class="row">
+  <div class="medium-6 columns ">
+
+    <form class="log-in-form" action="/profile/signin" method="post">
+    {% csrf_token %}
+      <div class="row column ">
+        <h4 class="text-center">Se connecter avec son compte email</h4>
+        {% for field in form %}
+        {{ field.errors }}
+
+          <label for="id_{{ field.name }}">{{ field.label }}{{ field }}</label>
+          {% endfor %}
+
+        </label>
+        <p><button type="submit" class="button expanded">Se connecter</button></p>
+        <!-- <p class="text-center"> Ou </p>
+        <p><button type="submit" class="button expanded">Se connecter avec Facebook</button></p> -->
+        <p class="text-center"><a href="#">mot de passe oublié?</a></p>
+
+      </div>
+    </form>
+
+  </div>
+
+
+<!-- <p class="text-center"><br>
+  OU
+<br></p> -->
+
+    <!-- fenetre inscription -->
+
+
+
+  <div class="medium-6 columns formcol">
+
+    <form class="log-in-form">
+      <div class="row column ">
+        <h4 class="text-center">Creez un compte</h4>
+        <p><a href="{% url "lozsignup-part" %}" type="submit" class="button expanded">Compte particulier</a></p>
+        <p class="text-center"> Or </p>
+        <p><a href="{% url "lozsignup-pro" %}" type="submit" class="button expanded">Compte pro</a></p>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+{% endblock %}

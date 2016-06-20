@@ -1,0 +1,63 @@
+ {% extends 'base.html' %}
+
+<!-- ----------------------------breadcrumb -->
+{% load leaflet_tags %}
+
+{% block content %}
+<div class="row columns">
+    <nav aria-label="You are here:" role="navigation">
+        <ul class="breadcrumbs">
+            <li><a href="{% url "home-page" %}">Home</a></li>
+            <li class="disabled">Events</li>
+        </ul>
+    </nav>
+</div>
+
+<!-- ---------------------------info evenements -->
+
+<div class="row medium-8 large-7 columns">
+
+  <p class="alert label">{{event.categorie}}</p>
+    <div class="infoevent">
+      <div class="row">
+      <div class="medium-6 columns">
+        <div class="text-center">
+            <p><img class="thumbnail" src="/media/{{event.photo}}"></p>
+        </div>
+      </div>
+
+      <div class="medium-6 columns">
+        <div class="eventdisplayinfo">
+            <p class="lead">{{event.title}}</p>
+            <p class="event-desc">{{event.desc|safe}}<br></p>
+            <p><span class="eventtext">Organisateur:</span> {{event.pro}}<br>
+            <span class="eventtext">Date de debut :</span> {{event.begin_date}}<br>
+            <span class="eventtext">Date de fin :</span> {{event.end_date}}<br>
+            <span class="eventtext">Adresse :</span> {{event.addr}}<br></p>
+        </div>
+      </div>
+   </div>
+
+</div>
+</div>
+
+
+
+<!-- ----------------------------------------------------map -->
+
+<script type="text/javascript">
+function map_init_basic (map, options) {
+
+    var marker = L.marker([{{event.addr.poly.y|stringformat:".5f"}}, {{event.addr.poly.x|stringformat:".5f"}}]).addTo(map);
+    map.setView({lat:{{event.addr.poly.y|stringformat:".5f"}}, lng:{{event.addr.poly.x|stringformat:".5f"}}}, 16);
+   // map.setView(marker.latLng);
+}
+</script>
+
+<div class="row medium-8 large-7 columns">
+    <div class="">
+        {% leaflet_map "idmap" callback="window.map_init_basic" %}
+    </div>
+</div>
+
+{% endblock %}

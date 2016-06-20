@@ -1,0 +1,88 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with profile.user.username as username %}{{ username }}'s profile.{% endblocktrans %}{% endblock %}
+{% block content_title %}<h2>{{ profile.user.username }} {% if profile.user.get_full_name %}({{ profile.user.get_full_name }}){% endif %}</h2>{% endblock %}
+
+{% block content %}
+<div class="row small-up-2 medium-up-3 large-up-5 rowProfile">
+
+    {% block profile_navigation %}
+      {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
+      {% if user.username == profile.user.username %}
+
+          {% block profile_navigation_items %}
+            <div class="column">
+             <div class="rond center">
+              <i class="fa fa-user" aria-hidden="true"></i>
+             </div>
+             <p class="fatexte"><a href="{% url 'userena_profile_detail' user.username %}" class="button buttonfa">{% trans "View profile" %}</a></p>
+            </div>
+            <div class="column">
+              <div class="rond center">
+               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+             </div>
+             <p class="fatexte"><a href="{% url 'userena_profile_edit' user.username %}" class="button buttonfa">{% trans "Edit details" %}</a></p>
+            </div>
+            <div class="column">
+              <div class="rond center">
+               <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+              </div>
+              <p class="fatexte"><a href="{% url 'userena_password_change' user.username %}" class="button buttonfa">{% trans "Change password" %}</a></p>
+            </div>
+            <div class="column">
+              <div class="rond center">
+               <i class="fa fa-envelope" aria-hidden="true"></i>
+              </div>
+              <p class="fatexte"><a href="{% url 'userena_email_change' user.username %}" class="button buttonfa">{% trans "Change email" %}</a></p>
+            </div>
+            <div class="column">
+              <div class="rond center">
+               <i class="fa fa-calendar" aria-hidden="true"></i>
+              </div>
+             <p class="fatexte"><a href="{% url 'event-create' %}"class="button buttonfa">Créer un événement</a></p>
+           </div>
+
+          {% endblock %}
+
+      {% endif %}
+    {% endblock %}
+
+    <div id="details">
+      {% block profile_details %}
+        <!-- <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" /> -->
+        <dl>
+          <!-- {% block profile_definition_list %}
+            {% if profile.user.get_full_name %}
+              <dt>{% trans "Name" %}</dt>
+              <dd>{{ profile.user.get_full_name }}</dd>
+            {% endif %}
+            {% if profile.user.email and not hide_email %}
+              <dt>{% trans "Email" %}</dt>
+              <dd>{{ profile.user.email }}</dd>
+            {% endif %}
+            {% if profile.age %}
+              <dt>{% trans "Age" %}</dt>
+              <dd>{{ profile.age }}</dd>
+            {% endif %}
+            {% if profile.website %}
+              <dt>{% trans "Website" %}</dt>
+              <dd>{{ profile.website|urlize }}</dd>
+            {% endif %}
+            {% if profile.location %}
+              <dt>{% trans "Location" %}</dt>
+              <dd>{{ profile.location }}</dd>
+            {% endif %}
+            {% if profile.about_me %}
+              <dt>{% trans "About me" %}</dt>
+              <dd>{{ profile.about_me }}</dd>
+            {% endif %}
+          {% endblock %} -->
+        </dl>
+      {% endblock %}
+    </div>
+  <!-- </div> -->
+
+  </div>
+  </div>
+{% endblock %}

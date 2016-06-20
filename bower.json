@@ -1,0 +1,22 @@
+{
+  "name": "lozevents",
+  "homepage": "https://github.com/laetilu/lozevents",
+  "authors": [
+    "laetilu <laetitialu@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "^6.2.1",
+    "font-awesome": "^4.6.1",
+    "slick-carousel": "^1.6.0"
+  }
+}
